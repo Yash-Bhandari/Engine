@@ -54,10 +54,6 @@ public class Circle extends GameObject {
 		return false;
 	}
 
-	void checkBounds() {
-
-	}
-
 	public void setRadius(int r) {
 		radius = r;
 		width = radius * 2;

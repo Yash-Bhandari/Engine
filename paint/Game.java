@@ -85,6 +85,7 @@ public class Game extends Canvas implements Runnable {
 
     public void update() {
         handler.updateObjects();
+        Level1.loop();
     }
 
     public void render() {
@@ -100,6 +101,7 @@ public class Game extends Canvas implements Runnable {
         g.setColor(Color.gray);
         g.fillRect(0, 0, WIDTH, HEIGHT);
         handler.renderObjects(g);
+        Level1.render(g);
 
         g.dispose();
         bs.show();

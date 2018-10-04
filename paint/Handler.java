@@ -6,14 +6,18 @@ import java.util.LinkedList;
 
 import gameObjects.Bullet;
 import gameObjects.GameObject;
+import gameObjects.Round;
 
 public class Handler {
 
 	private LinkedList<GameObject> objects;
 	private LinkedList<Bullet> bullets;
 
-	public GameObject controlled;
+	private GameObject controlled;
 	private Input input;
+
+	public int numKilled;
+	public int numEnemies;
 
 	public Handler(Input input) {
 		objects = new LinkedList<GameObject>();
@@ -28,6 +32,9 @@ public class Handler {
 			if (go instanceof Bullet) {
 				bullets.add((Bullet) go);
 			}
+		}
+		if (go instanceof Round) {
+			numEnemies++;
 		}
 		if (go.isControlled())
 			controlled = go;
@@ -45,12 +52,17 @@ public class Handler {
 		}
 
 		for (Bullet b : bullets) {
-			for (GameObject go : objects) {
-				if (!(go instanceof Bullet)) {
-					if (go.inside(b) && b.canHit(go)) {
-						go.discard();
-						b.discard();
-						
+			if (b.inUse()) {
+				for (GameObject go : objects) {
+					if (!(go instanceof Bullet) && go.inUse) {
+						if (go.inside(b) && b.canHit(go)) {
+							if (go instanceof Round) {
+								numEnemies--;
+								numKilled++;
+							}
+							go.discard();
+							b.discard();
+						}
 					}
 				}
 			}

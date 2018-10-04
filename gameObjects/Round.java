@@ -8,7 +8,7 @@ public class Round extends Circle {
 
     public static Round createRound(int radius, int x, int y, Color color, double speed, double radians) {
         Round go;
-        go = (Round)GameObject.repurpose(Bullet.class, x, y, false, color, speed);
+        go = (Round)GameObject.repurpose(Round.class, x, y, false, color, speed);
         if (go != null) {
             go.setRadius(radius);
             go.setSpeed(radians);

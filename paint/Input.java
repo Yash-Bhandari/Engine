@@ -86,6 +86,7 @@ public class Input implements KeyListener, MouseListener {
     }
 
     public void mousePressed(MouseEvent e) {
+    	if (e.getButton() == MouseEvent.BUTTON2) System.out.println("you cheeky fuck");
         shooting = true;
     }
 

@@ -119,7 +119,6 @@ public abstract class GameObject {
         angle = Math.acos((mouseX - x) / distance(mouseX, x, mouseY, y));
         if (y < mouseY)
             angle = Math.PI * 2 - angle;
-        // System.out.println(angle);
     }
 
     void checkBounds() {
