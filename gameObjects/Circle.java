@@ -53,6 +53,10 @@ public class Circle extends GameObject {
 		}
 		return false;
 	}
+	
+	public void collide(Circle c) {
+		
+	}
 
 	public void setRadius(int r) {
 		radius = r;

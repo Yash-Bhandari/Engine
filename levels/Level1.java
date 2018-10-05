@@ -1,6 +1,7 @@
 package levels;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
 import gameObjects.Circle;
@@ -27,9 +28,9 @@ public class Level1 {
 	public static void loop() {
 		if (handler.numKilled < 10 && handler.numEnemies < 5) {
 			randEnemy();
-		} 
+		}
 	}
-	
+
 	public static void render(Graphics g) {
 		if (handler.numEnemies == 0) {
 			g.drawString("Hey, ya won. That's pretty dope", 20, 20);
@@ -41,15 +42,26 @@ public class Level1 {
 	}
 
 	private static void randEnemy() {
+
+		double angle = Math.random() * 2 * Math.PI;
+		Dimension d = findDimension();
+		int x = (int)d.getWidth();
+		int y = (int)d.getHeight();
+		handler.add(Round.createRound(20, x, y, Color.red, 2, angle));
+
+	}
+
+	private static Dimension findDimension() {
 		int x = (int) (Math.random() * Game.WIDTH);
 		int y = (int) (Math.random() * Game.HEIGHT);
 		Circle player = (Circle) handler.getControlled();
-		while ((x > player.getX() - player.getRadius() * 2 && x < player.getX() - player.getRadius() * 2)
+		while (x > 50 && x < Game.WIDTH - 50 && y > 50 && y < Game.HEIGHT - 50
+				&& (x > player.getX() - player.getRadius() * 2 && x < player.getX() - player.getRadius() * 2)
 				&& (y > player.getY() - player.getRadius() * 2 && y < player.getY() + player.getRadius() * 2)) {
 			x = (int) (Math.random() * Game.WIDTH);
 			y = (int) (Math.random() * Game.HEIGHT);
 		}
-		double angle = Math.random() * 2 * Math.PI;
-		handler.add(Round.createRound(20, x, y, Color.red, 2, angle));
+		return new Dimension(x, y);
 	}
+
 }
